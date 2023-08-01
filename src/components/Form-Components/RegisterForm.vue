@@ -1,6 +1,6 @@
 <template>
-    <form action="#" @submit=submit >
-        <FormHeading heading="Login"/>
+    <form action="#" @submit="submit">
+        <FormHeading heading="Register"/>
         
         <div class="form-inputs">
             <div class="form-input">
@@ -15,6 +15,12 @@
                 </label>
                 <input v-model="pass" placeholder="Password" id="password" type="password" name="password">
             </div>
+            <div class="form-input">
+                <label for="retype-password">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
+                </label>
+                <input v-model="re_pass" placeholder="Retype Password" id="retype-password" type="password" name="retype-password">
+            </div>
         </div>
 
         <ErrorMessage 
@@ -23,29 +29,30 @@
         />
 
         <SubmitButton />
-        
+
         <ViewChangeButton 
         @change-view="$emit('change-view')"
-        message_1="Not registered?"
-        message_2="Register here."
+        message_1="Already registered?"
+        message_2="Login here."
         />
     </form>
 </template>
 
 <script setup lang="ts">
-import SubmitButton from './SubmitButton.vue';
-import ViewChangeButton from './ViewChangeButton.vue';
-import ErrorMessage from './ErrorMessage.vue';
-import FormHeading from './FormHeading.vue'
+import SubmitButton from '@/components/Button-Components/SubmitButton.vue';
+import ViewChangeButton from '@/components/Button-Components/ViewChangeButton.vue';
+import ErrorMessage from '@/components/Text-Components/ErrorMessage.vue';
+import FormHeading from '@/components/Text-Components/FormHeading.vue';
+
 import { ref } from 'vue';
 import { computed } from 'vue';
 
 
 const email = ref('');
 const pass = ref('');
+const re_pass = ref('');
 const is_error = ref(false)
 const error_message = ref('')
-
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
 const is_email_valid = computed(()=>{
@@ -53,23 +60,33 @@ const is_email_valid = computed(()=>{
 })
 
 const is_empty = computed(()=>{
-    return email.value==="" || pass.value===""
+    return email.value==="" || pass.value==="" || re_pass.value===""
+})
+
+const is_pass_equal = computed(()=>{
+    return pass.value === re_pass.value
 })
 
 function submit(e:Event){
     e.preventDefault();
-
+    
     if (is_empty.value){
         error_message.value = "Fields should not be empty"
         is_error.value = true
         return
     }
-
     if (is_email_valid.value){
         error_message.value = "Invalid email"
         is_error.value = true
         return
     }
+
+    if (!is_pass_equal.value){
+        error_message.value = "Passwords do not match"
+        is_error.value = true
+        return
+    }
+
     is_error.value = false
 }
 </script>
@@ -115,4 +132,9 @@ label{
 label svg{
     fill: var(--color-text);
 }
+
+.form-input:nth-child(4) svg{
+    fill: rgb(165, 162, 170) !important;
+}
+
 </style>
