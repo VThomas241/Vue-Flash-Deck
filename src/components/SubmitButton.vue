@@ -1,5 +1,7 @@
 <template>
-    <button type="submit">Submit</button>
+    <div class="submit-btn">
+        <button type="submit">Submit</button>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -7,7 +9,10 @@
 </script>
 
 <style scoped>
-button[type="submit"]{
+.submit-btn{
+    margin-bottom: 1.5em;
+}
+button{
     background-color: #5B8FB9;
     width: 100%;
     padding: 0.75em 1.5em;
@@ -15,19 +20,20 @@ button[type="submit"]{
     color: white;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus-visible{
+button:hover,
+button:focus-visible{
     background-color: #386386;
 }
 
 @media (prefers-color-scheme: dark){
-    button[type="submit"]{
+    button{
         color: black;
     }
 
-    button[type="submit"]:hover,
-    button[type="submit"]:focus-visible{
-    background-color: #72aad8;
+    button:hover,
+    button:focus-visible{
+    background-color: var(--color-background-mute);
+    color: white;
 }
 }
 </style>

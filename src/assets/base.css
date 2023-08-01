@@ -1,18 +1,27 @@
+/* Importing google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --primary: #03001C;
   --secondary: #301E67;
   --tertiary: #5B8FB9;
   --quartary: #B6EADA;
+
+  --font-heading: 'Oswald', sans-serif;
+  --font-text: 'Source Sans 3', sans-serif;
+
+
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: #deefea;
-  --color-background-soft: #B6EADA;
+  --color-background: #8acab7;
+  --color-background-soft: #bde9dc;
   --color-background-mute: #d1e3de;
 
-  --color-border: var(--vt-c-divider-light-2);
+  --color-border: #8ac3b3;
   --color-border-hover: var(--vt-c-divider-light-1);
 
   --color-heading: #301E67;
@@ -27,7 +36,7 @@
     --color-background-soft: #301E67;
     --color-background-mute: #0a0829;
 
-    --color-border: var(--vt-c-divider-dark-2);
+    --color-border: rgba(255, 255, 255, 0.178);
     --color-border-hover: var(--vt-c-divider-dark-1);
 
     --color-heading: #5B8FB9;
@@ -44,11 +53,15 @@
   font-weight: normal;
 }
 
+body,p,a,button,input,::placeholder{
+  font-family: var(--font-text);
+
+}
+
 button,input{
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
-  font-family: inherit;
 }
 body {
   min-height: 100vh;
@@ -62,4 +75,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: var(--font-heading);
 }

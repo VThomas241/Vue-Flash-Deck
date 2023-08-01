@@ -6,12 +6,15 @@
         <main>
             <div class="container">
                 <div class="form-container">
+
                     <LoginForm 
                     @change-view="changeView"
                     v-if="login_view" />
+
                     <RegisterForm 
                     @change-view="changeView"
                     v-else />
+
                 </div>
             </div>
         </main>
@@ -54,9 +57,10 @@ function changeView(){
         padding: 2em;
         max-width: 500px;
         margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.098);
     }
     main{
-        margin-top: 8em;
+        margin-top: 5em;
     }
     
     

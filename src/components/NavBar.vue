@@ -68,6 +68,7 @@ const menuClick = () => {
     .nav-links-heading{
         position: relative;
         font-size: 1.8rem;
+        letter-spacing: 4px;
         text-align: center;
         color: var(--color-heading);
         margin-bottom: 0.5em;
@@ -76,12 +77,16 @@ const menuClick = () => {
         /* border: 1px solid red; */
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
+        /* gap: 1.5em; */
         align-items: center;
         list-style: none;
         font-size: 1.2rem;
     }
     .nav-link{
+        border-top: 1px solid var(--color-border);
+        padding-block: 1em;
+        width: 100%;
+        text-align: center;
         position: relative;
 
     }
@@ -100,7 +105,8 @@ const menuClick = () => {
             background-color: transparent;
             width: fit-content;
             opacity: 100%;
-            visibility: visible;    
+            visibility: visible;
+            box-shadow: 0 0 0 0;    
         }
 
         .nav-links-heading{
@@ -108,7 +114,12 @@ const menuClick = () => {
         }
         .nav-links{
             flex-direction: row;
+            gap: 1.5em;
             /* border: 2px solid red; */
+        }
+        .nav-link{
+            border: 0;
+            padding: 0;
         }
     }
 
