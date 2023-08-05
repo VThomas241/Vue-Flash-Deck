@@ -1,70 +1,56 @@
 <template>
     <form action="#" @submit="submit">
-        <FormHeading heading="Register"/>
-        
-        <div class="form-inputs">
-            <div class="form-input">
-                <label for="email">
+        <FormBase heading="Register" 
+        message_1="Not registered?" message_2="Register here."
+        :is_error="is_error" :error_message="error_message"
+        @change-view="$emit('change-view')">
+            <FormInput type="text" id="register-email" label="Email" :data="email">
+                <template #logo-svg>
                     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
-                </label>
-                <input v-model="email" placeholder="Email" id="email" type="text" name="email">
-            </div>
-            <div class="form-input">
-                <label for="password">
+                </template>
+            </FormInput>
+            <FormInput type="password" id="register-pass" label="Password" :data="pass">
+                <template #logo-svg>
                     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
-                </label>
-                <input v-model="pass" placeholder="Password" id="password" type="password" name="password">
-            </div>
-            <div class="form-input">
-                <label for="retype-password">
+                </template>
+            </FormInput>
+            <FormInput type="password" id="register-repass" label="Retype Password" :data="re_pass">
+                <template #logo-svg>
                     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
-                </label>
-                <input v-model="re_pass" placeholder="Retype Password" id="retype-password" type="password" name="retype-password">
-            </div>
-        </div>
-
-        <ErrorMessage 
-        :is_error="is_error"
-        :error_message="error_message"
-        />
-
-        <SubmitButton />
-
-        <ViewChangeButton 
-        @change-view="$emit('change-view')"
-        message_1="Already registered?"
-        message_2="Login here."
-        />
+                </template>
+            </FormInput>
+        </FormBase>
     </form>
 </template>
 
 <script setup lang="ts">
-import SubmitButton from '@/components/Button-Components/SubmitButton.vue';
-import ViewChangeButton from '@/components/Button-Components/ViewChangeButton.vue';
-import ErrorMessage from '@/components/Text-Components/ErrorMessage.vue';
-import FormHeading from '@/components/Text-Components/FormHeading.vue';
+import FormInput from '@/components/Form-Components/FormInput.vue';
+import FormBase from './FormBase.vue';
 
-import { ref } from 'vue';
+
+import { ref, reactive } from 'vue';
 import { computed } from 'vue';
 
 
-const email = ref('');
-const pass = ref('');
-const re_pass = ref('');
+const email = reactive({data: ''});
+const pass = reactive({data: ''});
+const re_pass = reactive({data: ''});
+
 const is_error = ref(false)
 const error_message = ref('')
+
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
 const is_email_valid = computed(()=>{
-    return email.value.search(regex_email)
+    return email.data.search(regex_email)
 })
 
 const is_empty = computed(()=>{
-    return email.value==="" || pass.value==="" || re_pass.value===""
+    return email.data==="" || pass.data==="" || re_pass.data===""
 })
 
 const is_pass_equal = computed(()=>{
-    return pass.value === re_pass.value
+    return pass.data === re_pass.data
 })
 
 function submit(e:Event){
@@ -92,49 +78,8 @@ function submit(e:Event){
 </script>
 
 <style  scoped>
-.form-input{
-        display: flex;
-        /* flex-wrap: wrap; */
-        justify-content: space-between;
-        align-items: center;
-        margin: 1.5em 0;
-
-    }
-.form-input * {
-    color: var(--color-text);
-
-}
-.form-input h4{
-    flex-basis: 100%;
-}
-input{
-    flex-grow: 1;
-    padding: 5px;
-    width: 100%;
-    background: 0;
-    border: 0;
-    border-bottom: 1px solid;
-    /* border-radius: 5px; */
-    color: var(--quartary);
-}
-
-input:focus-visible{
-    outline: 0;
-    /* outline: 1px solid white; */
-}
-label{
-    color: var(--quartary);
-    display: flex;
-    width: 1em;
-    margin-right: 1em;
-    align-items: center;
-}
-label svg{
+svg{
     fill: var(--color-text);
-}
-
-.form-input:nth-child(4) svg{
-    fill: rgb(165, 162, 170) !important;
 }
 
 </style>

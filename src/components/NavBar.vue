@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import TrigramButton from '@/components/TrigramButton.vue'
+import TrigramButton from '@/components/Button-Components/TrigramButton.vue'
 import { ref } from 'vue';
 
 const navMenu = ref<HTMLElement | null>(null);

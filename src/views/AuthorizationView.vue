@@ -6,15 +6,17 @@
         <main>
             <div class="container">
                 <div class="form-container">
-
-                    <LoginForm 
-                    @change-view="changeView"
-                    v-if="login_view" />
-
-                    <RegisterForm 
-                    @change-view="changeView"
-                    v-else />
-
+                    <div class="form-aside">
+                        <img src="@/assets/svgs/form-aside.svg" alt="">
+                    </div>
+                    <div class="form">
+                        <LoginForm
+                        @change-view="changeView"
+                        v-if="login_view" />
+                        <RegisterForm
+                        @change-view="changeView"
+                        v-else />
+                    </div>
                 </div>
             </div>
         </main>
@@ -25,6 +27,8 @@
 import NavBar from '@/components/NavBar.vue';
 import LoginForm from '@/components/Form-Components/LoginForm.vue';
 import RegisterForm from '@/components/Form-Components/RegisterForm.vue';
+import FormBase from '@/components/Form-Components/FormBase.vue';
+
 
 import { ref } from 'vue';
 
@@ -51,8 +55,20 @@ function changeView(){
 
         /* border: 1px solid red; */
     }
+    img{
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
     .form-container{
-        border-radius: 1em;
+        display: grid;
+        max-width: 700px;
+        margin: 0 auto;
+        grid-template-columns: 1fr auto;
+    }
+    .form{
+        border-radius: 0 1em 1em 0;
         background-color: var(--color-background-soft);
         padding: 2em;
         max-width: 500px;
