@@ -68,6 +68,7 @@ input{
     padding-top: 10px;
     width: 100%;
     background: 0;
+    /* background-color: rgba(255, 255, 255, 0.273); */
     border: 0;
     border-bottom: 1px solid;
 }
@@ -100,5 +101,6 @@ label{
 }
 .error{
     color: red;
+    margin-top: 0.5em;
 }
 </style>
