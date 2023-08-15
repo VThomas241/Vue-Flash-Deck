@@ -21,8 +21,8 @@
 
 <script setup lang="ts">
 
-import FormInput from './FormInput.vue';
-import FormBase from './FormBase.vue';
+import FormInput from '@/components/Form-Components/FormInput.vue'
+import FormBase from '@/components/Form-Components/FormBase.vue';
 
 
 import { reactive, ref } from 'vue';

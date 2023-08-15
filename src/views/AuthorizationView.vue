@@ -22,9 +22,8 @@
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue';
-import LoginForm from '@/components/Form-Components/LoginForm.vue';
-import RegisterForm from '@/components/Form-Components/RegisterForm.vue';
-import FormBase from '@/components/Form-Components/FormBase.vue';
+import LoginForm from '@/components/Form-Views/LoginForm.vue';
+import RegisterForm from '@/components/Form-Views/RegisterForm.vue';
 
 
 import { ref } from 'vue';
