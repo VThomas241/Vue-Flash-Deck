@@ -1,8 +1,9 @@
 <template>
     <form action="#" @submit="submit">
-        <FormBase heading="Login" 
+        <FormBase 
+        heading="Login" 
         message_1="Not registered?" message_2="Register here."
-        :is_error="is_error" :error_message="error_message"
+        :valid="fields_valid"
         @change-view="$emit('change-view')">
             <FormInput type="text" id="login-email" label="Email" :data="email">
                 <template #logo-svg>
@@ -28,35 +29,15 @@ import { reactive, ref } from 'vue';
 import { computed } from 'vue';
 
 const email = reactive({data: ''});
-const pass = reactive({data: ''})
-
-const is_error = ref(false)
-const error_message = ref('')
+const pass = reactive({data: ''});
+const fields_valid = reactive({data: computed(()=>{
+    return email.data.search(regex_email) !== -1 && email.data!=="" && pass.data.length>=8
+})})
 
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
-const is_email_valid = computed(()=>{
-    return email.data.search(regex_email)
-})
-
-const is_empty = computed(()=>{
-    return email.data==="" || pass.data===""
-})
-
 function submit(e:Event){
-    e.preventDefault();
-    if (is_empty.value){
-        error_message.value = "Fields should not be empty"
-        is_error.value = true
-        return
-    }
-
-    if (is_email_valid.value){
-        error_message.value = "Invalid email"
-        is_error.value = true
-        return
-    }
-    is_error.value = false
+        e.preventDefault()
 }
 </script>
 

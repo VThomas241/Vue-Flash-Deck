@@ -5,12 +5,7 @@
             <slot></slot>
         </div>
 
-        <ErrorMessage 
-        :is_error="props.is_error"
-        :error_message="props.error_message"
-        />
-
-        <SubmitButton />
+        <SubmitButton :valid="props.valid"/>
 
         <ViewChangeButton 
         @change-view="$emit('change-view')"
@@ -22,10 +17,9 @@
 <script setup lang="ts">
 import SubmitButton from '@/components/Button-Components/SubmitButton.vue';
 import ViewChangeButton from '@/components/Button-Components/ViewChangeButton.vue';
-import ErrorMessage from '@/components/Text-Components/ErrorMessage.vue';
 import FormHeading from '@/components/Text-Components/FormHeading.vue';
 
-const props = defineProps(['heading','message_1','message_2','is_error','error_message'])
+const props = defineProps(['heading','message_1','message_2','valid'])
 
 </script>
 

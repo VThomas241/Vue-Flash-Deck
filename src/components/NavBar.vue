@@ -93,6 +93,10 @@ const menuClick = () => {
     .nav-link a{
         color: var(--color-text);
     }
+    .nav-link a:hover,
+    .nav-link a:focus-visible{
+        color: var(--color-heading);
+    }
     @media screen and (min-width: 450px){
         .nav-container{
             justify-content: space-between;

@@ -6,9 +6,6 @@
         <main>
             <div class="container">
                 <div class="form-container">
-                    <div class="form-aside">
-                        <img src="@/assets/svgs/form-aside.svg" alt="">
-                    </div>
                     <div class="form">
                         <LoginForm
                         @change-view="changeView"
@@ -65,18 +62,19 @@ function changeView(){
         display: grid;
         max-width: 700px;
         margin: 0 auto;
-        grid-template-columns: 1fr auto;
+        /* grid-template-columns: 1fr auto; */
     }
     .form{
-        border-radius: 0 1em 1em 0;
-        background-color: var(--color-background-soft);
+        border-radius: 1em;
+        border: 1px solid var(--color-text);
         padding: 2em;
-        max-width: 500px;
+        width: 100%;
+        max-width: 600px;
         margin: 0 auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.098);
     }
     main{
-        margin-top: 5em;
+        /* margin-top: 1em; */
     }
     
     
