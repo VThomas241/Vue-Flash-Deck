@@ -4,9 +4,11 @@
             <div class="logo">
                 <slot name="logo-svg"></slot>
             </div>
-            <div class="input">
-                <input @keydown="show_error = true" v-model="props.data.data" placeholder="" :id="props.id" :type="props.type">
-                <label :for="props.id">{{ props.label }}</label>
+            <div class="input-wrapper">
+                <div class="input">
+                    <input v-bind:style="{outline: is_error && show_error ? '1px solid red' : '0'}" @keydown="show_error = true" v-model="props.data.data" placeholder="" :id="props.id" :type="props.type">
+                    <label :for="props.id">{{ props.label }}</label>
+                </div>
                 <div v-bind:style="{visibility: is_error && show_error ? 'visible' : 'hidden'}" class="error">
                     <p v-if="props.type==='text'" class="error-text">Invalid Email</p>
                     <p v-if="props.type==='password'"> {{ props.label === 'Password' ? 'Password should be atleast 8 characters' : 'Passwords do not match'  }}</p>
@@ -56,30 +58,33 @@ let show_error = false
 .form-input__content{
     display: flex;
     align-items: center;
-    margin: 1.5em 0;
+    margin-bottom: 0.25em;
+}
+.input-wrapper{
+    width: 100%;
 }
 .input{
     position: relative;
-    width: 100%;
 }
 
 input{
-    padding: 5px;
-    padding-top: 10px;
+    padding: 10px;
+    padding-top: 20px;
     width: 100%;
     background: 0;
-    /* background-color: rgba(255, 255, 255, 0.273); */
+    background-color: rgba(255, 255, 255, 0.144);
     border: 0;
-    border-bottom: 1px solid;
+    border-radius: 5px;
+    /* border-bottom: 1px solid; */
 }
 input:placeholder-shown + label{
     transform: scale(1) translateY(0px);
 } 
 input:focus + label{
-    transform: scale(0.7) translateY(-18px);
+    transform: scale(0.7) translateY(-30px);
 }
 input:not(:placeholder-shown)+ label{
-    transform: scale(0.7) translateY(-18px);
+    transform: scale(0.7) translateY(-30px);
 }
 
 input:focus-visible{
@@ -90,14 +95,17 @@ input:focus-visible{
     width: 1em;
     margin-right: 1em;
     align-items: center;
+    transform: translateY(-12px);
+    opacity: 0.8;
 }
 label{
     position: absolute;
     pointer-events: none;
-    left: 5px;
-    top: 0px;
+    left: 10px;
+    bottom: 10px;
     transform-origin: left;
     transition: transform 0.3s ease;
+    opacity: 0.8;
 }
 .error{
     color: red;

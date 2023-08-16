@@ -11,8 +11,11 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.form-heading{
+.form-heading h2{
     text-align: center;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 0.8em;
 }
 </style>

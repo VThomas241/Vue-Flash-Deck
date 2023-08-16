@@ -32,7 +32,7 @@ const menuClick = () => {
 <style scoped>
     .nav-container{
         position: relative;
-        padding: 1em;
+        padding: 1em !important;
         display: flex;
         align-items: center;
         justify-content: space-between;

@@ -49,7 +49,6 @@ function changeView(){
         margin: 0 auto;
         padding: 2rem;
 
-        /* border: 1px solid red; */
     }
     img{
         display: block;
@@ -66,15 +65,13 @@ function changeView(){
     .form{
         border-radius: 1em;
         border: 1px solid var(--color-text);
-        padding: 2em;
+        padding-block: clamp(2rem, 6vw, 7rem);
+        padding-inline: clamp(2rem, 5vw, 5rem);
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.098);
     }
-    main{
-        /* margin-top: 1em; */
-    }
-    
+
     
 </style>

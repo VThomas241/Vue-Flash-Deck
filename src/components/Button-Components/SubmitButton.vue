@@ -15,16 +15,22 @@ const btn = ref<HTMLButtonElement | null>(null)
 
 <style scoped>
 .submit-btn{
+    margin-top: 1em;
     margin-bottom: 1.5em;
 }
 button{
     width: 100%;
-    padding: 0.75em 1.5em;
-    border-radius: 0.5em;
+    padding: 0.5em 1.5em;
+    border-radius: 5em;
     color: white;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease,
+    color 0.3s ease;
 }
 button[data-enabled="true"]{
-    background-color: #5B8FB9;
+    background-color: #47759cd7;
 }
 
 button[data-enabled="true"]:hover,
@@ -33,8 +39,9 @@ button[data-enabled="true"]:focus-visible{
 }
 
 button[data-enabled="false"]{
-    background-color: grey;
+    background-color: rgb(125, 122, 122);
     cursor: not-allowed;
+    color: rgb(0, 0, 0);
     /* pointer-events: none; */
 }
 
@@ -46,7 +53,7 @@ button[data-enabled="false"]{
     button[data-enabled="true"]:hover,
     button[data-enabled="true"]:focus-visible{
     background-color: var(--color-background-mute);
-    color: white;
+    color: rgba(255, 255, 255, 0.824);
     }
 }
 </style>

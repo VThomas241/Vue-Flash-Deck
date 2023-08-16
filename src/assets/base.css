@@ -9,7 +9,7 @@
   --tertiary: #5B8FB9;
   --quartary: #B6EADA;
 
-  --font-heading: 'Oswald', sans-serif;
+  --font-heading: 'Source Sans 3', sans-serif;
   --font-text: 'Source Sans 3', sans-serif;
 
 
@@ -40,7 +40,7 @@
     --color-border-hover: var(--vt-c-divider-dark-1);
 
     --color-heading: #5B8FB9;
-    --color-text: #B6EADA;
+    --color-text: #9db0aa;
   }
 }
 
