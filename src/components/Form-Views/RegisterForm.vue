@@ -74,7 +74,7 @@ async function submit(e:Event){
     const res = await registerUser(payload).then(res=>res).catch(e=>{console.log(e)}).finally(()=>{
         register_loading.value.data = false
     })
-    console.log(res.code)
+    // console.log(res.code)
 
 
 }

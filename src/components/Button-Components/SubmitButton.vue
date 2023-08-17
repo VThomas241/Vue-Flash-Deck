@@ -5,6 +5,7 @@
 </template>
 <!-- Not fixed yet  -->
 <script setup lang="ts">
+import { watch } from 'vue';
 import { ref, onMounted, computed } from 'vue';
 const props = defineProps(['valid','loading'])
 
@@ -16,8 +17,13 @@ const btn = ref<HTMLButtonElement | null>(null);
 
 onMounted(()=>{
     if (btn.value){
-        btn.value.disabled = valid.value
+        btn.value.disabled = !props.valid.data
     }
+    watch(props.valid,(oldValue,newValue)=>{
+        if (btn.value){
+            btn.value.disabled = !newValue.data
+        }
+    })
 })
 
 

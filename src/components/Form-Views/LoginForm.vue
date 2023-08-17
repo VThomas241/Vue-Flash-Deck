@@ -34,19 +34,43 @@ const pass = reactive({data: ''});
 const login_loading = ref({data: false})
 
 
+
+const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+
 const fields_valid = reactive({data: computed(()=>{
     return email.data.search(regex_email) !== -1 && email.data!=="" && pass.data.length>=8
 })})
 
-const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+
+async function loginUser(payload:Object) {
+    const result = await fetch('http://127.0.0.1:5000/login/',{
+            method: 'POST',
+            mode:'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }).then(data=> data.json()).catch(e=>{console.log(e)})
+
+    return result
+    
+} 
+
+async function submit(e:Event){
+    e.preventDefault();
+    if (!fields_valid) return
+    login_loading.value.data = true
+    const payload = {
+        email: email.data,
+        password: pass.data
+    }
+
+    const res = await loginUser(payload).then(res=>res).catch(e=>{console.log(e)}).finally(()=>{
+        login_loading.value.data = false
+    })
+    // console.log(res.code)
 
 
-
-
-function submit(e:Event){
-        e.preventDefault()
-
-        
 }
 </script>
 
