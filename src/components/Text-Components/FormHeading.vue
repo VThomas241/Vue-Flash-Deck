@@ -15,7 +15,7 @@ const props = defineProps({
     text-align: center;
     letter-spacing: 2px;
     font-size: 40px;
-    font-weight: 700;
+    font-weight: 300;
     margin-bottom: 0.8em;
 }
 </style>

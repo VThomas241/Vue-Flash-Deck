@@ -1,14 +1,24 @@
 <template>
     <div class="submit-btn">
-        <button :data-enabled="props.valid.data" ref="btn" type="submit">Submit</button>
+        <button ref="btn" :class="{ loading : props.loading.data }" :data-enabled="props.valid.data" type="submit">Submit</button>
     </div>
 </template>
-
+<!-- Not fixed yet  -->
 <script setup lang="ts">
-import {ref,watch} from 'vue'
+import { ref, onMounted, computed } from 'vue';
+const props = defineProps(['valid','loading'])
 
-const props = defineProps(['valid'])
-const btn = ref<HTMLButtonElement | null>(null)
+const valid = computed(()=>{
+    return props.valid.data
+})
+
+const btn = ref<HTMLButtonElement | null>(null);
+
+onMounted(()=>{
+    if (btn.value){
+        btn.value.disabled = valid.value
+    }
+})
 
 
 </script>
@@ -17,6 +27,13 @@ const btn = ref<HTMLButtonElement | null>(null)
 .submit-btn{
     margin-top: 1em;
     margin-bottom: 1.5em;
+    isolation: isolate;
+}
+.submit::after{
+    content: '';
+    inset: 0;
+    background-color: #47759cd7;
+    z-index: 0;
 }
 button{
     width: 100%;
@@ -28,6 +45,7 @@ button{
     letter-spacing: 1px;
     transition: background-color 0.3s ease,
     color 0.3s ease;
+    z-index: 1;
 }
 button[data-enabled="true"]{
     background-color: #47759cd7;

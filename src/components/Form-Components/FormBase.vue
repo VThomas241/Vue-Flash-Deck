@@ -5,7 +5,7 @@
             <slot></slot>
         </div>
 
-        <SubmitButton :valid="props.valid"/>
+        <SubmitButton :loading="props.loading" :valid="props.valid"/>
 
         <ViewChangeButton 
         @change-view="$emit('change-view')"
@@ -19,8 +19,9 @@ import SubmitButton from '@/components/Button-Components/SubmitButton.vue';
 import ViewChangeButton from '@/components/Button-Components/ViewChangeButton.vue';
 import FormHeading from '@/components/Text-Components/FormHeading.vue';
 
-const props = defineProps(['heading','message_1','message_2','valid'])
+const props = defineProps(['heading','message_1','message_2','valid','loading'])
 
+defineEmits(['change-view'])
 </script>
 
 <style  scoped>

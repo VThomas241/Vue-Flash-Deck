@@ -66,7 +66,9 @@ function changeView(){
         border-radius: 1em;
         border: 1px solid var(--color-text);
         padding-block: clamp(2rem, 6vw, 7rem);
-        padding-inline: clamp(2rem, 5vw, 5rem);
+        padding-inline: clamp(1rem, 5vw, 5rem);
+        background-color: rgb(7, 6, 38);
+        backdrop-filter: blur(500px);
         width: 100%;
         max-width: 600px;
         margin: 0 auto;

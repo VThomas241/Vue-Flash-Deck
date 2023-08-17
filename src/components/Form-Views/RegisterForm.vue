@@ -2,6 +2,7 @@
     <form action="#" @submit="submit">
         <FormBase heading="Register" 
         message_1="Already registered?" message_2="Login here."
+        :loading="register_loading"
         :valid="fields_valid"
         @change-view="$emit('change-view')">
             <FormInput type="text" id="register-email" label="Email" :data="email">
@@ -35,7 +36,7 @@ import { computed } from 'vue';
 const email = reactive({data: ''});
 const pass = reactive({data: ''});
 const re_pass = reactive({data: ''});
-
+const register_loading = ref({data: false})
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
 const fields_valid = reactive({
@@ -44,8 +45,37 @@ const fields_valid = reactive({
     })
 })
 
-function submit(e:Event){
+
+
+async function registerUser(payload:Object) {
+    const result = await fetch('http://127.0.0.1:5000/register/',{
+            method: 'POST',
+            mode:'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }).then(data=> data.json()).catch(e=>{console.log(e)})
+
+    return result
+    
+} 
+
+async function submit(e:Event){
     e.preventDefault();
+    if (!fields_valid) return
+    register_loading.value.data = true
+    const payload = {
+        user_name: email.data,
+        email: email.data,
+        password: pass.data
+    }
+
+    const res = await registerUser(payload).then(res=>res).catch(e=>{console.log(e)}).finally(()=>{
+        register_loading.value.data = false
+    })
+    console.log(res.code)
+
 
 }
 </script>

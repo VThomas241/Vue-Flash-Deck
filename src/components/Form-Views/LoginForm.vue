@@ -3,6 +3,7 @@
         <FormBase 
         heading="Login" 
         message_1="Not registered?" message_2="Register here."
+        :loading="login_loading"
         :valid="fields_valid"
         @change-view="$emit('change-view')">
             <FormInput type="text" id="login-email" label="Email" :data="email">
@@ -30,14 +31,22 @@ import { computed } from 'vue';
 
 const email = reactive({data: ''});
 const pass = reactive({data: ''});
+const login_loading = ref({data: false})
+
+
 const fields_valid = reactive({data: computed(()=>{
     return email.data.search(regex_email) !== -1 && email.data!=="" && pass.data.length>=8
 })})
 
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
+
+
+
 function submit(e:Event){
         e.preventDefault()
+
+        
 }
 </script>
 
