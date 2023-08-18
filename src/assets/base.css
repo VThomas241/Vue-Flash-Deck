@@ -17,8 +17,8 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: #8acab7;
-  --color-background-soft: #bde9dc;
+  --color-background: hsl(162, 10%, 70%);
+  --color-background-soft: hsl(162, 10%, 80%);
   --color-background-mute: #d1e3de;
 
   --color-border: #8ac3b3;
@@ -27,6 +27,7 @@
   --color-heading: #301E67;
   --color-text: black;
 
+  --color-tint: rgba(0, 0, 0, 0.057);;
   --section-gap: 160px;
 }
 
@@ -39,6 +40,7 @@
     --color-border: rgba(255, 255, 255, 0.178);
     --color-border-hover: var(--vt-c-divider-dark-1);
 
+    --color-tint: rgba(255,255,255,0.2);
     --color-heading: #5B8FB9;
     --color-text: #9db0aa;
   }

@@ -1,6 +1,7 @@
 <template>
     <div class="submit-btn">
-        <button ref="btn" :class="{ loading : props.loading.data }" :data-enabled="props.valid.data" type="submit">Submit</button>
+        <button ref="btn" :data-enabled="props.valid.data" type="submit">Submit</button>
+        <div v-if="props.loading.data" class="lds-ring"><div></div><div></div><div></div><div></div></div>
     </div>
 </template>
 <!-- Not fixed yet  -->
@@ -8,10 +9,6 @@
 import { watch } from 'vue';
 import { ref, onMounted, computed } from 'vue';
 const props = defineProps(['valid','loading'])
-
-const valid = computed(()=>{
-    return props.valid.data
-})
 
 const btn = ref<HTMLButtonElement | null>(null);
 
@@ -34,13 +31,54 @@ onMounted(()=>{
     margin-top: 1em;
     margin-bottom: 1.5em;
     isolation: isolate;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.submit::after{
-    content: '';
-    inset: 0;
-    background-color: #47759cd7;
-    z-index: 0;
+
+.lds-ring {
+  display: inline-block;
+  position: absolute;
+  border-radius: 5em;
+  --size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #386386;
+  width: var(--size);
+  height: var(--size);
 }
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 8px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #4728c4 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 button{
     width: 100%;
     padding: 0.5em 1.5em;
@@ -51,7 +89,6 @@ button{
     letter-spacing: 1px;
     transition: background-color 0.3s ease,
     color 0.3s ease;
-    z-index: 1;
 }
 button[data-enabled="true"]{
     background-color: #47759cd7;

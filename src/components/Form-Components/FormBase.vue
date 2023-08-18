@@ -2,9 +2,11 @@
         <FormHeading :heading="props.heading"/>
         
         <div class="form-inputs">
-            <slot></slot>
+            <slot name="form_inputs"></slot>
         </div>
-
+        <div v-if="props.invalid_details" class="invalid_details_error">
+            <slot name="invalid_details_error"></slot>
+        </div>
         <SubmitButton :loading="props.loading" :valid="props.valid"/>
 
         <ViewChangeButton 
@@ -18,8 +20,7 @@
 import SubmitButton from '@/components/Button-Components/SubmitButton.vue';
 import ViewChangeButton from '@/components/Button-Components/ViewChangeButton.vue';
 import FormHeading from '@/components/Text-Components/FormHeading.vue';
-
-const props = defineProps(['heading','message_1','message_2','valid','loading'])
+const props = defineProps(['heading','message_1','message_2','valid','loading','invalid_details'])
 
 defineEmits(['change-view'])
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="view-change-btn">
         <p> {{ props.message_1 }}</p>
-        <button @click="$emit('change-view')">{{ props.message_2 }}</button>
+        <button @click.prevent="$emit('change-view')">{{ props.message_2 }}</button>
     </div>
 </template>
 

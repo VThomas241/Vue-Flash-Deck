@@ -1,14 +1,13 @@
 <template>
-    <div class="error-message" v-show="is_error">
-        <p>{{ error_message }}</p>
+    <div class="error-message">
+        <p>{{ props.message }}</p>
     </div>
 </template>
 
 <script setup lang="ts">
 
 const props = defineProps({
-    is_error: Boolean,
-    error_message: String
+    message: String
 })
 
 </script>

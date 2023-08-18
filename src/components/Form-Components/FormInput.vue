@@ -72,7 +72,7 @@ input{
     padding-top: 20px;
     width: 100%;
     background: 0;
-    background-color: rgba(255, 255, 255, 0.144);
+    background-color: var(--color-tint);
     border: 0;
     border-radius: 5px;
     /* border-bottom: 1px solid; */
@@ -81,10 +81,10 @@ input:placeholder-shown + label{
     transform: scale(1) translateY(0px);
 } 
 input:focus + label{
-    transform: scale(0.7) translateY(-30px);
+    transform: scale(0.7) translateY(-28px);
 }
 input:not(:placeholder-shown)+ label{
-    transform: scale(0.7) translateY(-30px);
+    transform: scale(0.7) translateY(-28px);
 }
 
 input:focus-visible{

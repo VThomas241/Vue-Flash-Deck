@@ -64,15 +64,15 @@ function changeView(){
     }
     .form{
         border-radius: 1em;
-        border: 1px solid var(--color-text);
+        /* border: 1px solid var(--color-text); */
         padding-block: clamp(2rem, 6vw, 7rem);
         padding-inline: clamp(1rem, 5vw, 5rem);
-        background-color: rgb(7, 6, 38);
+        background-color: var(--color-background-soft);
         backdrop-filter: blur(500px);
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.098);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     }
 
     
