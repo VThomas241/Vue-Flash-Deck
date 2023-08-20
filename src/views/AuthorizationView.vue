@@ -6,13 +6,9 @@
         <main>
             <div class="container">
                 <div class="form-container">
-                    <div class="form">
-                        <LoginForm
-                        @change-view="changeView"
-                        v-if="login_view" />
-                        <RegisterForm
-                        @change-view="changeView"
-                        v-else />
+                    <div @change-view="changeView" class="form">
+                        <LoginForm  @change-view="changeView" v-if="login_view" />
+                        <RegisterForm @change-view="changeView" v-else />
                     </div>
                 </div>
             </div>

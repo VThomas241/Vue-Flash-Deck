@@ -4,10 +4,12 @@
         <div class="form-inputs">
             <slot name="form_inputs"></slot>
         </div>
-        <div v-if="props.invalid_details" class="invalid_details_error">
+
+        <SubmitButton :loading="props.loading" :valid="props.valid"/>
+        
+        <div v-if="props.error" class="invalid_details_error">
             <slot name="invalid_details_error"></slot>
         </div>
-        <SubmitButton :loading="props.loading" :valid="props.valid"/>
 
         <ViewChangeButton 
         @change-view="$emit('change-view')"
@@ -20,7 +22,7 @@
 import SubmitButton from '@/components/Button-Components/SubmitButton.vue';
 import ViewChangeButton from '@/components/Button-Components/ViewChangeButton.vue';
 import FormHeading from '@/components/Text-Components/FormHeading.vue';
-const props = defineProps(['heading','message_1','message_2','valid','loading','invalid_details'])
+const props = defineProps(['heading','message_1','message_2','valid','loading','error'])
 
 defineEmits(['change-view'])
 </script>

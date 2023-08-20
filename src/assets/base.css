@@ -34,7 +34,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: #03001C;
-    --color-background-soft: #301E67;
+    --color-background-soft: hsl(255, 93%, 14%);
     --color-background-mute: #0a0829;
 
     --color-border: rgba(255, 255, 255, 0.178);

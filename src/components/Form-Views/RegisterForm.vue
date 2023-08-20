@@ -3,6 +3,7 @@
         <FormBase heading="Register" 
         message_1="Already registered?" message_2="Login here."
         :loading="register_loading"
+        :error="error"
         :valid="fields_valid"
         @change-view="$emit('change-view')">
             <template #form_inputs>
@@ -23,7 +24,7 @@
                 </FormInput>
             </template>
             <template #invalid_details_error>
-                <ErrorMessage message="An error occured, please try again"/>
+                <ErrorMessage :message="error_message"/>
             </template>
         </FormBase>
     </form>
@@ -36,6 +37,7 @@ import ErrorMessage from '../Text-Components/ErrorMessage.vue';
 
 import { ref, reactive } from 'vue';
 import { computed } from 'vue';
+defineEmits(['change-view'])
 
 
 const email = reactive({data: ''});
@@ -43,6 +45,8 @@ const pass = reactive({data: ''});
 const re_pass = reactive({data: ''});
 const register_loading = ref({data: false})
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+const error = ref(false)
+const error_message = ref('')
 
 const fields_valid = reactive({
     data: computed(()=>{
@@ -60,7 +64,11 @@ async function registerUser(payload:Object) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
-        }).then(data=> data.json()).catch(e=>{console.log(e)})
+        }).then(data=> data.json()).catch(e=>{
+            console.log(e)
+            error.value = true
+            error_message.value = 'A network error occurred'
+        })
 
     return result
     
@@ -69,6 +77,7 @@ async function registerUser(payload:Object) {
 async function submit(e:Event){
     e.preventDefault();
     if (!fields_valid) return
+    error.value = false
     register_loading.value.data = true
     const payload = {
         user_name: email.data,
@@ -76,10 +85,16 @@ async function submit(e:Event){
         password: pass.data
     }
 
-    const res = await registerUser(payload).then(res=>res).catch(e=>{console.log(e)}).finally(()=>{
+    const res = await registerUser(payload).then(res=>res).catch(e=>{
+        console.log(e)
+    }).finally(()=>{
         register_loading.value.data = false
     })
-    // console.log(res.code)
+    
+    if (res && res.code >= 400){
+        error.value = true
+        error_message.value = 'Invalid email or password'
+    }
 
 
 }

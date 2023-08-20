@@ -4,7 +4,7 @@
         heading="Login" 
         message_1="Not registered?" message_2="Register here."
         :loading="login_loading"
-        :invalid_details="invalid_details"
+        :error="error"
         :valid="fields_valid"
         @change-view="$emit('change-view')">
             <template #form_inputs>
@@ -20,7 +20,7 @@
                 </FormInput>
             </template>
             <template #invalid_details_error>
-                <ErrorMessage message="Your email or password is incorrect"/>
+                <ErrorMessage :message="error_message"/>
             </template>
         </FormBase>
     </form>
@@ -34,12 +34,16 @@ import ErrorMessage from '../Text-Components/ErrorMessage.vue';
 
 import { reactive, ref } from 'vue';
 import { computed } from 'vue';
+import router from '@/router';
+
+
+defineEmits(['change-view'])
 
 const email = reactive({data: ''});
 const pass = reactive({data: ''});
 const login_loading = ref({data: false})
-const invalid_details = ref(false)
-
+const error = ref(false)
+const error_message = ref('')
 
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
@@ -56,7 +60,11 @@ async function loginUser(payload:Object) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
-        }).then(data=> data.json()).catch(e=>{console.log(e)})
+        }).then(data=> data.json()).catch(e=>{
+            console.log(e)
+            error.value = true
+            error_message.value = 'A network error occurred'
+        })
 
     return result
     
@@ -65,20 +73,31 @@ async function loginUser(payload:Object) {
 async function submit(e:Event){
     e.preventDefault();
     if (!fields_valid) return
+
+    error.value = false
     login_loading.value.data = true
+    
     const payload = {
         email: email.data,
         password: pass.data
     }
 
-    const res = await loginUser(payload).then(res=>res).catch(e=>{console.log(e)}).finally(()=>{
+    const res = await loginUser(payload).then(res=>res).catch(e=>{
+        console.log(e)
+    }).finally(()=>{
         login_loading.value.data = false
     })
 
-    if (res.code >= 400){
-        invalid_details.value = true
+    if (res){
+        if (res.code === 200){
+            localStorage.setItem('token',res.token)
+            router.push('/')
+        }
+        else if (res && res.code >= 400){
+            error.value = true
+            error_message.value = 'Your email or password is incorrect'
+        }
     }
-    // console.log(res.code)
 
 
 }
