@@ -92,10 +92,14 @@ const menuClick = () => {
     }
     .nav-link a{
         color: var(--color-text);
+        padding: 0.5em 1em;
+        background-color: var(--color-background-mute);
+        border-radius: 4px;
     }
     .nav-link a:hover,
     .nav-link a:focus-visible{
-        color: var(--color-heading);
+        color: var(--color-background);
+        background-color: var(--color-text);
     }
     @media screen and (min-width: 450px){
         .nav-container{
