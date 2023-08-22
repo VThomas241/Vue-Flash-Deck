@@ -91,9 +91,9 @@ async function submit(e:Event){
     if (res){
         if (res.code === 200){
             localStorage.setItem('token',res.token)
-            router.push('/')
+            router.push('/dashboard')
         }
-        else if (res && res.code >= 400){
+        else if (res.code >= 400){
             error.value = true
             error_message.value = 'Your email or password is incorrect'
         }
