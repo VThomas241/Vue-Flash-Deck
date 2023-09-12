@@ -1,25 +1,30 @@
 <template>
-    <div class="container-screen">
+    <ContainerScreen>
         <header>
-            <NavBar class="container"/>
+            <Container>
+                <NavBar />
+            </Container>
         </header>
         <main>
-            <div class="container">
+            <Container>
                 <div class="form-container">
                     <div @change-view="changeView" class="form">
                         <LoginForm  @change-view="changeView" v-if="login_view" />
                         <RegisterForm @change-view="changeView" v-else />
                     </div>
                 </div>
-            </div>
+            </Container>
         </main>
-    </div>
+    </ContainerScreen>
 </template>
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue';
 import LoginForm from '@/components/Form-Views/LoginForm.vue';
 import RegisterForm from '@/components/Form-Views/RegisterForm.vue';
+import Container from '@/components/Container-Components/Container.vue'
+import ContainerScreen from '@/components/Container-Components/ContainerScreen.vue'
+
 
 
 import { ref } from 'vue';
@@ -37,15 +42,7 @@ function changeView(){
         opacity: 0.5;
         font-size: inherit;
     }
-    .container-screen{
-        min-height: 100vh;
-    }
-    .container{
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 2rem;
 
-    }
     img{
         display: block;
         height: 100%;
